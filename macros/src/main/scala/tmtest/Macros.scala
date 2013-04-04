@@ -8,7 +8,8 @@ object Macros {
 
     val Expr(Literal(Constant(tpeName: String))) = typeName
 
-    val tpe = Types.getType(tpeName).asInstanceOf[Type]
+//    val tpe = Types.getType(tpeName).asInstanceOf[Type]
+    val tpe = Types.getTypeOfUniverse(ctx.universe)(tpeName).asInstanceOf[Type]
     
     def generateCode(): List[Tree] = {
       val Expr(Block(List(ValDef(mods, lhs, tpt, rhs)), Literal(Constant(())))) = reify {
@@ -16,7 +17,7 @@ object Macros {
       }
       val valDef = ValDef(mods, lhs, tpt, rhs)
 //      val valDef = ValDef(mods, lhs, TypeTree(tpe.asInstanceOf[Type]), rhs)
-      val typeDef = TypeDef(NoMods, TypeName("MyInt"), List(), TypeTree(tpe))
+      val typeDef = TypeDef(NoMods, TypeName("MyType"), List(), TypeTree(tpe))
 //      val typeDef = TypeDef(NoMods, TypeName("MyInt"), List(), TypeTree(definitions.IntTpe))
       List(valDef, typeDef)
     }
