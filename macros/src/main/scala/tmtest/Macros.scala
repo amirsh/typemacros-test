@@ -17,6 +17,7 @@ object Macros {
       val valDef = ValDef(mods, lhs, tpt, rhs)
 //      val valDef = ValDef(mods, lhs, TypeTree(tpe.asInstanceOf[Type]), rhs)
       val typeDef = TypeDef(NoMods, TypeName("MyInt"), List(), TypeTree(tpe))
+//      val typeDef = TypeDef(NoMods, TypeName("MyInt"), List(), TypeTree(definitions.IntTpe))
       List(valDef, typeDef)
     }
 
